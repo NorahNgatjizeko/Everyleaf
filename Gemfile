@@ -10,7 +10,7 @@ gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 5.1.0'
+gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -18,9 +18,9 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 
-gem 'coffee-rails', '~> 5'
+gem 'coffee-rails'
 
-gem 'nokogiri', '~> 1.8'
+gem 'nokogiri', '~> 1.11'
 
 gem 'rexml'
 # Use Redis adapter to run Action Cable in production
@@ -49,7 +49,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'rubocop', require: false
+  # gem 'rubocop', require: false
   gem 'spring'
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
