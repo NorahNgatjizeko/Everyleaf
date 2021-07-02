@@ -251,7 +251,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (>= 5.1.0)
   selenium-webdriver
-  spring
+  spring (~> 2.1.1)
   spring-commands-rspec
   turbolinks (~> 5)
   tzinfo-data
