@@ -25,7 +25,7 @@ gem 'rexml'
 gem 'bcrypt', '~> 3.1.7'
 gem 'launchy'
 gem 'faker'
-
+gem 'geocoder'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
