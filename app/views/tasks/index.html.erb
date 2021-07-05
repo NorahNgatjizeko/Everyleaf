@@ -2,7 +2,22 @@
 
 <h1>Tasks</h1>
 
-<table>
+<nav class="navbar navbar-light bg-light">
+<%= form_with url: tasks_path, method: :get, html: {class: "form-inline"} , local: true do |form| %>
+  <%= form.label :task_name, "Task name:" %>
+  <%= form.text_field :task_name, placeholder: "Search...", class: "form-control mr-sm-2" %>
+  <%= form.label :status, "Status:" %>
+  <%= form.select :status, options_for_select([[''],['Not started'], ['In progress'], ['Completed']]), class: "form-control mr-sm-2"%>
+  <%= form.submit value: "search", class: "btn btn-outline-success my-2 my-sm-0", type: "submit" %>
+<% end %>
+</nav>
+<br>
+<p>
+  <button type="button" class="btn btn-info" id="sort_deadline"><%= link_to "Sort by end deadline", tasks_path(sort_expired: "true") %></button>
+  <button type="button" class="btn btn-info" id="sort_priority"><%= link_to "Sort by priority", tasks_path(sort_priority_high: "true") %></button>
+</p>
+
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Task name</th>
@@ -17,19 +32,20 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.task_name %></td>
+        <td class="task_row scope="row"><%= task.task_name %></td>
         <td><%= task.description %></td>
-        <td><%= task.priority %></td>
+        <td class="priority_row"><%= task.priority %></td>
         <td><%= task.status %></td>
-        <td><%= task.deadline %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="deadline_row"><%= task.deadline %></td>
+        <td><%= link_to 'Show', task, data: { confirm: 'Are you sure you want to see the task details?' }, :class => "btn btn-primary btn-sm" %></td>
+        <td><%= link_to 'Edit', edit_task_path(task), data: { confirm: 'Are you sure you want to edit the task?' }, :class => "btn btn-primary btn-sm" %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure you want to delete the task?' }, :class => "btn btn-primary btn-sm" %></td>
       </tr>
     <% end %>
+    <%= paginate @tasks %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>
+<button class="btn btn-primary" type="button"><%= link_to 'New task', new_task_path %></button>
