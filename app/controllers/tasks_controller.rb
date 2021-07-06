@@ -15,7 +15,7 @@ PER = 5
   elsif params[:status].present?
       @tasks = Task.all.status_search(params[:status]).page params[:page]
   elsif params[:sort_priority]
-      @tasks = Task.all.priority_ordered.page params[:page]
+      @tasks = Task.all.order('priority DESC').page params[:page]
   else
       @tasks = Task.all.order('created_at DESC').page params[:page]
       @tasks = @tasks.order(created_at: :desc).page(params[:page]).per(PER)
