@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_05_015545) do
+ActiveRecord::Schema.define(version: 2021_07_05_034015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,18 @@ ActiveRecord::Schema.define(version: 2021_07_05_015545) do
     t.string "task_name"
     t.string "description"
     t.string "status"
-    t.string "priority"
+    t.integer "priority"
     t.date "deadline"
     t.index ["task_name"], name: "index_tasks_on_task_name"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
