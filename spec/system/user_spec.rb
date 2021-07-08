@@ -6,7 +6,7 @@ RSpec.describe 'User management function', type: :system do
       it 'User is registered' do
         visit new_user_path
         fill_in 'user[name]', with: 'sample'
-        fill_in 'user[email]', with: 'sample@example.com'
+        fill_in 'user[email]', with: 'sample1@example.com'
         fill_in 'user[password]', with: '00000000'
         fill_in 'user[password_confirmation]', with: '00000000'
         click_button "Register"
@@ -39,7 +39,7 @@ RSpec.describe 'User management function', type: :system do
     context 'When the user tries to jump to your details screen' do
       it 'You can jump to your details screen' do
         visit new_session_path
-        fill_in 'session[email]', with: 'sample@example.com'
+        fill_in 'session[email]', with: 'sample1@example.com'
         fill_in 'session[password]', with: '00000000'
         click_button "Login"
         visit user_path (@user.id)
@@ -100,7 +100,7 @@ RSpec.describe 'User management function', type: :system do
         click_button "Login"
         visit new_admin_user_path
         fill_in 'user[name]', with: 'sample'
-        fill_in 'user[email]', with: 'sample@example.com'
+        fill_in 'user[email]', with: 'sample1@example.com'
         fill_in 'user[password]', with: '00000000'
         fill_in 'user[password_confirmation]', with: '00000000'
         click_button "Register"
