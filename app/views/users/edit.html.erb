@@ -1,0 +1,35 @@
+<%= form_with(model: @user, local: true) do |form| %>
+<% if @user.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= @user.errors.count%>From the error<%= @user.name if @user.name %><%= "User"  if @user.name.empty? %>Could not be registered.</h2>
+		<ul>
+		<% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+		<% end %>
+		</ul>
+	</div>
+<% end %>
+<br>
+  <div class="user">
+    <p>Update Profile</p>
+    <div class="form">
+        <br>
+        <%=form.label :Name %>
+        <%= form.text_field :name, placeholder: "Name..." %>
+        <br>
+        <br>
+        <%=form.label :Email %>
+        <%= form.email_field :email, placeholder: "Email..." %>
+        <br>
+        <br>
+        <%= form.password_field :password, placeholder: "Password..." %>
+        <br>
+        <br>
+        <%= form.password_field :password_confirmation, placeholder: "Password confirmation..." %>
+        <br>
+        <br>
+    </div>
+    <br>
+    <%= form.submit "Update", class: "submit" %>
+  </div>
+<% end %>

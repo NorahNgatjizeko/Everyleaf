@@ -1,8 +1,11 @@
-# README
+# Everyleaf Task
 
 ## App Schema
 
-Model : task
+### Models
+
+#### Model : task
+- belongs_to :user
 
 | Column      |  Description   |
 | ----------- | -------------- |
@@ -11,6 +14,15 @@ Model : task
 | Status      | String         |
 | Priority    | String         |
 | Deadline    | Date           |
+
+#### Model : user
+- has_many :tasks
+
+| Column      |  Description   |
+| ----------- | -------------- |
+| Name        | String         |
+| Email       | String         |
+| Password    | String         |
 
 ### How to deploy on Heroku
 

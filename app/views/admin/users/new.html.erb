@@ -1,7 +1,8 @@
-<h1>Sign up</h1>
+<h1>Admin creates a user</h1>
+
 
 <div class="form">
-  <%= form_with(model: @user, local: true) do |f| %>
+  <%= form_with(model: @user, local: true, url: admin_users_path) do |f| %>
     <% if @user.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
@@ -12,7 +13,6 @@
         </ul>
       </div>
     <% end %>
-
     <br>
     <%= f.text_field :name, id: "name", placeholder: "Name..." %>
     <br>
@@ -26,6 +26,6 @@
     <%= f.password_field :password_confirmation, id: "password_confirmation", placeholder: "Password confirmation..." %>
     <br>
     <br>
-    <%= f.submit "Create my account", class: "submit", value: "Register" %>
+    <%= f.submit "Create account", class: "submit", value: "Register" %>
   <% end %>
 </div>
