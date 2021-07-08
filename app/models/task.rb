@@ -3,7 +3,6 @@ class Task < ApplicationRecord
   validates :task_name, presence: true
   validates :description, presence: true
 
-
   enum priority: [:low, :medium, :high]
   scope :task_name_search, -> (query) {where("task_name LIKE ?", "%#{query}%")}
 	def task_name_search(query)
