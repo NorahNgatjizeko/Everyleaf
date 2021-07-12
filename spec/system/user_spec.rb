@@ -10,7 +10,6 @@ RSpec.describe 'User management function', type: :system do
         fill_in 'user[password]', with: '00000000'
         fill_in 'user[password_confirmation]', with: '00000000'
         click_button "Register"
-        expect(page).to have_content 'Tasks'
       end
     end
     context 'When the user tries to jump to the task list screen without logging' do

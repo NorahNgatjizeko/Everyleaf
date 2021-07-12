@@ -1,6 +1,6 @@
 <h2>Users List</h2>
 <% @users.each do |user| %>
-	<p><%= user.id %> : <%= @user.name %>, Tasks created: <%= user.tasks.count %> ,
+	<p><%= user.id %> : <%= user.name %>, Tasks created: <%= user.tasks.count %> ,
 		<% if user.admin == true %>
 			Role: Admin <%= link_to 'Unset admin', admin_user_path(user.id, admin: "true"), method: :patch %>
 		<% else %>
