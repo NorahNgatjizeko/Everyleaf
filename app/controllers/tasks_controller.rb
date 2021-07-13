@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :login_required
 PER = 5
   # GET /tasks or /tasks.json
   def index

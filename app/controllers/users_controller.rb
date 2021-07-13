@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create, :edit, :update, :show], raise: false
-
+  before_action :login_required, only: [:edit, :update, :show]
   def new
     if logged_in?
   		redirect_to tasks_path

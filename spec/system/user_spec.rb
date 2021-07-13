@@ -1,6 +1,5 @@
 require 'rails_helper'
 RSpec.describe 'User management function', type: :system do
-
   describe 'User creation function' do
     context 'When creating a new user' do
       it 'User is registered' do
@@ -26,7 +25,6 @@ RSpec.describe 'User management function', type: :system do
     end
     context 'When user tries login' do
       it 'Login is a success' do
-
           visit new_session_path
           fill_in 'email', with: @user.email
           fill_in 'password', with: @user.password
@@ -38,8 +36,8 @@ RSpec.describe 'User management function', type: :system do
     context 'When the user tries to jump to your details screen' do
       it 'You can jump to your details screen' do
         visit new_session_path
-        fill_in 'session[email]', with: 'sample1@example.com'
-        fill_in 'session[password]', with: '00000000'
+        fill_in 'session[email]', with: @user.email
+        fill_in 'session[password]', with: @user.password
         click_button "Login"
         visit user_path (@user.id)
         expect(page).to have_content 'Welcome to your page sample'
@@ -103,7 +101,7 @@ RSpec.describe 'User management function', type: :system do
         fill_in 'user[password]', with: '00000000'
         fill_in 'user[password_confirmation]', with: '00000000'
         click_button "Register"
-        expect(page).to have_content 'Users list'
+        expect(page).to have_content 'Set admin'
       end
     end
     context 'When admin tries to access the user details screen' do
