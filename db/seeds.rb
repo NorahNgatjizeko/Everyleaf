@@ -14,3 +14,11 @@
 	    password_confirmation: "password",
 	)
 end
+
+10.times do |index|
+ User.create!( name: "admin",
+                 email: "admin@gmail.com",
+                 password: "123456",
+                 password_confirmation: "123456",
+                 admin: true )
+ 		end
