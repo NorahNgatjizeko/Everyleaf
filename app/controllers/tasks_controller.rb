@@ -1,23 +1,26 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :login_required
 PER = 5
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.user_task_list(current_user.id)
       if params[:sort_expired]
-       @tasks = Task.all.order('deadline DESC').page params[:page]
+       @tasks = @tasks.order('deadline DESC').page params[:page]
    elsif params[:task_name].present?
      if params[:status].present?
-      @tasks = Task.all.task_name_search(params[:task_name]).status_search(params[:status]).page params[:page]
+      @tasks = @tasks.task_name_search(params[:task_name]).status_search(params[:status]).page params[:page]
     else
-      @tasks = Task.all.task_name_search(params[:task_name]).page params[:page]
+      @tasks = @tasks.task_name_search(params[:task_name]).page params[:page]
     end
   elsif params[:status].present?
-      @tasks = Task.all.status_search(params[:status]).page params[:page]
+      @tasks = @tasks.status_search(params[:status]).page params[:page]
   elsif params[:sort_priority]
-      @tasks = Task.all.order('priority DESC').page params[:page]
+
+      @tasks = @tasks.order('priority DESC').page params[:page]
+
   else
-      @tasks = Task.all.order('created_at DESC').page params[:page]
+      @tasks = @tasks.order('created_at DESC').page params[:page]
       @tasks = @tasks.order(created_at: :desc).page(params[:page]).per(PER)
     end
   end
@@ -38,17 +41,19 @@ PER = 5
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
+      @task.user_id = current_user.id
+   # @task = current_user.tasks.build(task_params)
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: "Task was successfully created." }
-        format.json { render :show, status: :created, location: @task }
+    if params[:back]
+  render :new
+  else
+    if @task.save
+    redirect_to tasks_path, notice: "The task was successfully created"
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+         render :new
       end
-    end
-  end
+     end
+   end
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
@@ -75,7 +80,7 @@ PER = 5
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = Task.find(params[:id])
+      @task = current_user.tasks.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -1,5 +1,11 @@
- Rails.application.routes.draw do
-  root "tasks#index"
+Rails.application.routes.draw do
   resources :tasks
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :users
+  resources :sessions
+
+  namespace :admin do
+   resources :users, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
+    end
+  end
+  root 'sessions#new'
 end

@@ -1,6 +1,8 @@
 class Task < ApplicationRecord
+  belongs_to :user
   validates :task_name, presence: true
   validates :description, presence: true
+
   enum priority: [:low, :medium, :high]
   scope :task_name_search, -> (query) {where("task_name LIKE ?", "%#{query}%")}
 	def task_name_search(query)
@@ -12,6 +14,11 @@ class Task < ApplicationRecord
   	  where(status: query)
   	end
 
+    scope :user_task_list, -> (query) {where(user_id: query)}
+   def user_task_list(query)
+     where(user_id: query)
+   end
+
   	scope :priority_ordered, -> {order("
   	    CASE tasks.priority
   	    WHEN 'high' THEN 'a'
@@ -21,4 +28,5 @@ class Task < ApplicationRecord
   	    END ASC,
   	    id DESC" )}
   	max_paginates_per 5
+
 end

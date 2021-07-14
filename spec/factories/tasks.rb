@@ -4,6 +4,7 @@ FactoryBot.define do
     description {'description1'}
     status {'Completed'}
     deadline {DateTime.now}
+
   end
 
   factory :second_task, class: Task do
@@ -11,5 +12,6 @@ FactoryBot.define do
     description {'description2'}
     status {'Not started'}
     deadline {DateTime.tomorrow}
+    association :user
   end
   end
