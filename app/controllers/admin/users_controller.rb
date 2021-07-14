@@ -32,7 +32,7 @@ class Admin::UsersController < ApplicationController
 			end
 		else
 			if @user.update(user_params)
-			    redirect_to admin_users_path, notice: "Profil edited!"
+			    redirect_to admin_users_path, notice: "Profile edited!"
 			else
 			    render :edit
 			end
@@ -51,7 +51,7 @@ class Admin::UsersController < ApplicationController
 
 	def user_params
 		params.require(:user).permit(:name, :email, :password,
-	                          	 :password_confirmation)
+	                          	 :password_confirmation, :admin)
 	end
 
 	def set_user
