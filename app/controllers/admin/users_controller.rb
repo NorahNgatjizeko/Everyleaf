@@ -27,7 +27,7 @@ class Admin::UsersController < ApplicationController
 			end
 		else
 			if @user.update(user_params)
-			    redirect_to admin_users_path, notice: "Profil edited!"
+			    redirect_to admin_users_path, notice: "Profile edited!"
 			else
 			    render :edit
 			end
