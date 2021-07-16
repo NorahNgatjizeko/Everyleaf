@@ -35,7 +35,11 @@
     <%= form.date_select :deadline, id: "deadline", class: "form-control"%>
   </div>
 
-  <%= form.submit value:"Register", class: "btn btn-primary submit"%>
+  <% Label.all.each do |label| %>
+  <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+  <%= form.label :label_ids, label.name, class:"label-bg", value: label[:id]%>
+  <% end %>
+    <%= form.submit value:"Register", class: "btn btn-primary submit"%>
 </div>
 <% end %>
 <br>

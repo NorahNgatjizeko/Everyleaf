@@ -15,10 +15,10 @@ PER = 5
     end
   elsif params[:status].present?
       @tasks = @tasks.status_search(params[:status]).page params[:page]
+  elsif params[:label_id].present?
+        @tasks = @tasks.label_search(params[:label_id]).page params[:page]
   elsif params[:sort_priority]
-
       @tasks = @tasks.order('priority DESC').page params[:page]
-
   else
       @tasks = @tasks.order('created_at DESC').page params[:page]
       @tasks = @tasks.order(created_at: :desc).page(params[:page]).per(PER)
@@ -85,6 +85,6 @@ PER = 5
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:task_name,:description,:status, :priority, :deadline)
+      params.require(:task).permit(:task_name, :description, :status, :priority, :deadline, label_ids: [])
     end
 end
