@@ -26,6 +26,23 @@
 </p>
 
 <p>
+  <strong>Status:</strong>
+  <%=  @task.status %>
+</p>
+
+<p>
+  <strong>label name:</strong>
+    <% @task.labels.each do |label| %>
+      <%= label.name %><br>
+    <% end %>
+</p>
+
+<h3>List of labels associated with the tasks</h3>
+<% @task.labels.pluck(:name).each do |task_label| %>
+  <p><%= task_label %></p>
+<% end %>
+
+<p>
 <button type="button" class="btn btn-info btn-sm" id="edit"><%=  link_to 'Edit', edit_task_path(@task) %></button>
 <button type="button" class="btn btn-info btn-sm" id="back"><%= link_to 'Back', tasks_path %></button>
 </p>
